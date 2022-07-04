@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>📈 Data Structures</title>
+    <style>
+        body{ background-color:rgb(201, 171, 248);font-family:Trebuchet MS, sans-serif;}
+        h1{text-align: center;font-family:Trebuchet MS, sans-serif;font-size:45px;text-shadow: 2px 2px #dd8cd8;background-color:#eee1f7; }
+        h4{margin-left:80%;font-family:Trebuchet MS, sans-serif;text-shadow: 2px 2px #dd8cd8;}
+        form{font-weight: bold;font-size:25px;}
+        .input{height:35px;width:70px;border: 4px solid #FFB830;background-color:azure;text-align:center;font-size: 25px;font-weight: bold;}
+        #stack{margin-left: 20%;}
+        #pointer{font-size: 30px;}
+        #push,#pop,#top,#display{font-weight: bold;font-size:25px;font-family:Trebuchet MS, sans-serif;background-color:#7DEDFF;border:3px solid black;height:50px;width:120px;}
+        #op{margin-left: 40%;position: relative;top: -370px;font-size: 25px;}
+        #int,#under{font-size: 30px;}
+        #under{color:#FF033E  ;}
+        #text1,#topp,#popped_item{width:100px;height:40px;font-weight: bold;text-align:center;font-size: 25px;background-color:azure;border:3px solid black;}
+        #disp{font-weight: bold;text-align:center;font-size: 25px;background-color:azure;border:3px solid black;margin-left: 28%;position: relative;top: -60px;}
+    </style>
+</head>
+<body>
+ <h1>OPERATIONS ON ARRAY REPRESENTATION OF STACK</h1>  
+ <h4>By Sejal Deshpande(20302F0023)</h4>
+ <hr style="height:2px;border-width:0;color:black;background-color:black">
+ <form>
+   <div id="stack">
+       <p style="font-size:27px;">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stack</p>
+   <div id="pointer">  4 -->&nbsp;
+    <input type="text" class="input"><br>
+    3 -->&nbsp;
+    <input type="text" class="input"><br>
+    2 -->&nbsp;
+    <input type="text" class="input"><br>
+    1 -->&nbsp;
+    <input type="text" class="input"><br>
+    0 -->&nbsp;
+    <input type="text" class="input"><br>
+   </div>
+    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top=-1</p>
+    <p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max=5</p>
+  </div> 
+   <div id="op"><div id="int">Enter an integer:
+    <input type="text" id="text1"><br><br></div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Push" id="push">
+    <input type="button" value="Pop" id="pop">
+    <input type="button" value="Top" id="top">
+    <input type="button" value="Traverse" id="display">
+    <p id="under"></p><p id="max"></p> 
+    <hr style="border-top:4px dotted black;">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Top Element:
+    <input type="text" id="topp"><br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Popped Element:
+    <input type="text" id="popped_item"><br><br>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Traversed Stack:</p>
+    <textarea rows="1" columns="8" id="disp"></textarea>
+    <hr style="border-top:4px dotted black;"></div>
+ </form>
+<script>
+    class stack{
+
+    constructor()
+    {this.Max = 5;
+    this.items = [];}
+
+    top()
+    { 
+        return this.items[this.items.length - 1];
+    }
+
+    isEmpty()
+    {
+        return this.items.length == 0;
+    }
+
+    isFull()
+    {
+        return this.items.length ==this.Max ;
+    }
+
+    pop()
+    {
+        if(this.isEmpty())
+        {
+            document.getElementById("under").innerHTML="Stack Underflow!!"
+        }
+    
+        document.getElementsByClassName("input")[5 - this.items.length].value = null;
+        return this.items.pop();}
+    
+
+    push(val)
+    {
+        if(this.isFull())
+        {
+            document.getElementById("under").innerHTML="Stack Overflow!!"
+        }
+        else
+        {
+            this.items.push(val);
+            document.getElementsByClassName("input")[5 - this.items.length].value = val;
+        }
+    }
+
+    traverse()
+    { if(this.isEmpty()){return "Stack is Empty";}
+       var top=this.Max-1;
+       while(top>=0){console.log(this.items[top]);
+           top--;}
+           return this.items;
+     } }
+
+var Stack = new stack();
+document.querySelector('#push').addEventListener("click", function (){
+    var value = document.getElementById("text1").value;
+    Stack.push(value);
+});
+
+document.querySelector('#pop').addEventListener("click", function (){
+    var value = Stack.pop();
+    document.querySelector("#popped_item").value = value;
+})
+
+document.querySelector("#max").value = Stack.Max;
+document.querySelector("#top").addEventListener("click", function (){
+    document.getElementById("topp").value = Stack.top();
+})
+
+document.querySelector("#display").addEventListener("click",function(){
+    var arr=Stack.traverse();
+    document.querySelector("#disp").value=arr;})
+
+    </script>
+  </body>
+</html>
